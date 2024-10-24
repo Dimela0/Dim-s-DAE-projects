@@ -1,0 +1,124 @@
+import pygame
+import sys
+import random
+
+# Initialize Pygame
+pygame.init()
+
+# Set up display
+WIDTH, HEIGHT = 800, 400
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption('2D Running Game')
+
+# Define colors
+LIGHT_GREEN = (169, 223, 191)
+RED, BLACK = (255, 0, 0), (0, 0, 0)
+
+# Character properties
+character_size = 50
+character_x = 50
+character_y = HEIGHT - character_size - 10
+gravity, jump_strength = 0.5, 10
+is_jumping, character_y_change = False, 0
+
+# Obstacle properties
+obstacle_width, obstacle_speed = 20, 5
+obstacle_x, obstacle_height = WIDTH, random.randint(20, 100)
+obstacle_y = HEIGHT - obstacle_height - 10
+
+# Game variables
+score, high_score, difficulty_timer = 0, 0, 0
+difficulty_increment, speed_increase = 3000, 0.5
+
+# Initialize clock and font
+clock = pygame.time.Clock()
+font = pygame.font.SysFont(None, 36)
+
+
+def handle_events():
+    """Handles user input events."""
+    global is_jumping, character_y_change
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_SPACE] and not is_jumping:
+        is_jumping, character_y_change = True, -jump_strength
+
+
+def update_character():
+    """Updates character's position and jump logic."""
+    global is_jumping, character_y, character_y_change
+    if is_jumping:
+        character_y += character_y_change
+        character_y_change += gravity
+        if character_y >= HEIGHT - character_size - 10:
+            character_y, is_jumping = HEIGHT - character_size - 10, False
+
+
+def update_obstacle():
+    """Updates the obstacle's position and resets it if needed."""
+    global obstacle_x, obstacle_y, obstacle_height, score
+    obstacle_x -= obstacle_speed
+    if obstacle_x < -obstacle_width:
+        obstacle_x, obstacle_height = WIDTH, random.randint(20, 100)
+        obstacle_y = HEIGHT - obstacle_height - 10
+        score += 1
+
+
+def increase_difficulty():
+    """Increases the obstacle speed over time."""
+    global obstacle_speed, difficulty_timer
+    difficulty_timer += clock.get_time()
+    if difficulty_timer >= difficulty_increment:
+        obstacle_speed += speed_increase
+        difficulty_timer = 0
+
+
+def check_collision():
+    """Checks for collision between the character and the obstacle."""
+    if (obstacle_x < character_x + character_size and
+        obstacle_x + obstacle_width > character_x and
+        obstacle_y < character_y + character_size and
+        obstacle_y + obstacle_height > character_y):
+        print(f"Game Over! Your score: {score}")
+        pygame.quit()
+        sys.exit()
+
+
+def render_screen():
+    """Renders the character, obstacle, score, and background."""
+    screen.fill(LIGHT_GREEN)
+    pygame.draw.rect(screen, RED, (character_x, character_y, character_size, character_size))
+    pygame.draw.rect(screen, BLACK, (obstacle_x, obstacle_y, obstacle_width, obstacle_height))
+    render_text(f'Score: {score}', 10, 10)
+    render_text(f'High Score: {high_score}', 10, 40)
+    pygame.display.flip()
+
+
+def render_text(text, x, y):
+    """Renders text on the screen at the given position."""
+    label = font.render(text, True, BLACK)
+    screen.blit(label, (x, y))
+
+
+def game_loop():
+    """Main game loop."""
+    global high_score
+
+    while True:
+        handle_events()
+        update_character()
+        update_obstacle()
+        increase_difficulty()
+        check_collision()
+        render_screen()
+        high_score = max(high_score, score)
+        clock.tick(30)
+
+
+# Run the game
+if __name__ == "__main__":
+    game_loop()
