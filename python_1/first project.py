@@ -1,164 +1,166 @@
+# Import necessary modules
 import pygame
 import sys
 import random
 
-# Initialize Pygame
+# Initialize Pygame and related settings
 pygame.init()
 
-# Set up display dimensions and window title
+# Set up the main display window's dimensions and title
 WIDTH, HEIGHT = 800, 400
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('2D Running Game')
 
 # Define colors used in the game
-SKY_BLUE = (135, 206, 235)
-LIGHT_GREEN = (169, 223, 191)
-RED = (255, 0, 0)
-BLACK = (0, 0, 0)
+SKY_BLUE = (135, 206, 235)  # Light blue for the sky background
+LIGHT_GREEN = (169, 223, 191)  # Light green for the ground
+RED = (255, 0, 0)  # Color for the main character
+BLACK = (0, 0, 0)  # Color for obstacles
 
-# Character properties
-character_size = 50
-character_x = 50
-character_y = HEIGHT - character_size - 10  # Ground position
-character_y_change = 0
-gravity = 0.5  # Gravity effect when jumping
-jump_strength = 10  # Character jump power
-is_jumping = False  # Status for jumping
+# Define character properties
+character_size = 50  # Size of the main character (square dimensions)
+character_x = 50  # X-position (horizontal) for the character's starting point
+character_y = HEIGHT - character_size - 10  # Y-position (vertical) adjusted for ground level
+character_y_change = 0  # Vertical change in character's position
+gravity = 0.5  # Simulated gravity effect when jumping
+jump_strength = 10  # Jump strength to propel the character upwards
+is_jumping = False  # Boolean flag to track if character is in the jumping state
 
-# Obstacle properties and list to hold multiple obstacles
-obstacle_width = 20
-obstacle_speed = 5
-obstacles = []  # List to store multiple obstacles
+# Define obstacle properties
+obstacle_width = 20  # Fixed width for each obstacle
+obstacle_speed = 5  # Speed at which obstacles move towards the character
+obstacles = []  # List to store dynamically generated obstacles
 
-# Game variables
-score = 0  # Current score
-high_score = 0  # High score tracker
-difficulty_timer = 0  # Timer to increase difficulty
-difficulty_increment = 3000  # Time in milliseconds after which difficulty increases
-speed_increase = 0.5  # Amount to increase obstacle speed each time
+# Initialize game variables
+score = 0  # Player's score for avoiding obstacles
+high_score = 0  # Tracks the highest score achieved in the game
+difficulty_timer = 0  # Timer for difficulty scaling
+difficulty_increment = 3000  # Milliseconds before difficulty increase
+speed_increase = 0.5  # Speed increase for obstacles at each difficulty increment
 
-# Clock to control the frame rate
+# Clock object to control game frame rate
 clock = pygame.time.Clock()
 
-# Custom function to create a new obstacle and add it to the obstacles list
+# Function to create and return a new obstacle dictionary
 def create_obstacle():
-    """Generate a new obstacle with random height and position."""
-    height = random.randint(20, 100)  # Random height for obstacle
-    obstacle_x = WIDTH  # Start from the right side of the screen
-    obstacle_y = HEIGHT - height - 10  # Ground position
-    obstacles.append({'x': obstacle_x, 'y': obstacle_y, 'height': height})  # Add to the list
+    """Generate and add a new obstacle to the obstacles list with random height."""
+    height = random.randint(20, 100)  # Randomized height for variation in obstacles
+    obstacle_x = WIDTH  # Starting x-position, right edge of the screen
+    obstacle_y = HEIGHT - height - 10  # Y-position adjusted for ground level
+    obstacles.append({'x': obstacle_x, 'y': obstacle_y, 'height': height})
 
-# Function to handle game events such as quitting the game or jumping
+# Function to handle user inputs, including game exit and jump action
 def handle_events():
-    """Handle user inputs like quitting or jumping."""
+    """Handle Pygame events such as quitting and character jumping."""
     global is_jumping, character_y_change
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+    for event in pygame.event.get():  # Loop through all active events
+        if event.type == pygame.QUIT:  # Check if the game window is closed
+            pygame.quit()  # Exit the Pygame module
+            sys.exit()  # Terminate the program
 
-    # Check if the spacebar is pressed for jumping
+    # Check if spacebar is pressed to initiate a jump
     keys = pygame.key.get_pressed()
     if keys[pygame.K_SPACE] and not is_jumping:
-        is_jumping = True
-        character_y_change = -jump_strength  # Set upward movement for the jump
+        is_jumping = True  # Set jumping state to true
+        character_y_change = -jump_strength  # Apply upward jump strength
 
-# Update the character's position based on jumping mechanics and gravity
+# Function to update the character's position based on jump mechanics and gravity
 def update_character():
-    """Update the character's position based on jump and gravity."""
+    """Update character's vertical position considering jump and gravity."""
     global character_y, is_jumping, character_y_change
     if is_jumping:
-        character_y += character_y_change  # Update character's vertical position
-        character_y_change += gravity  # Simulate gravity
-        if character_y >= HEIGHT - character_size - 10:  # Check if on the ground
-            character_y = HEIGHT - character_size - 10  # Set character on the ground
-            is_jumping = False  # Stop jumping when on the ground
+        character_y += character_y_change  # Apply current vertical change
+        character_y_change += gravity  # Increase downward speed by gravity
+        if character_y >= HEIGHT - character_size - 10:  # Check ground level collision
+            character_y = HEIGHT - character_size - 10  # Reset to ground level
+            is_jumping = False  # Reset jumping state
 
-# Update the position of all obstacles in the list and create new ones
+# Function to update the position of obstacles and manage obstacle creation
 def update_obstacles():
-    """Update obstacle positions and remove those that leave the screen."""
+    """Move obstacles leftward and create new ones if needed."""
     global score
     for obstacle in obstacles:
-        obstacle['x'] -= obstacle_speed  # Move the obstacle leftwards
+        obstacle['x'] -= obstacle_speed  # Move obstacle leftward by speed
 
-    # Remove obstacles that have moved off the screen and generate new ones
+    # Remove obstacles that exit the screen and create new ones
     if obstacles and obstacles[0]['x'] < -obstacle_width:
-        obstacles.pop(0)  # Remove the first obstacle when it moves out of the screen
-        create_obstacle()  # Create a new obstacle
-        score += 1  # Increment score when an obstacle is successfully avoided
+        obstacles.pop(0)  # Remove off-screen obstacle
+        create_obstacle()  # Generate new obstacle
+        score += 1  # Increase score for successful avoidance
 
-# Increase the game's difficulty by speeding up the obstacles
+# Function to increase game difficulty by increasing obstacle speed
 def increase_difficulty():
-    """Increase obstacle speed over time to make the game harder."""
+    """Periodically increase the speed of obstacles for added challenge."""
     global obstacle_speed, difficulty_timer
-    difficulty_timer += clock.get_time()
+    difficulty_timer += clock.get_time()  # Increment timer by elapsed time
     if difficulty_timer >= difficulty_increment:
-        obstacle_speed += speed_increase  # Increase obstacle speed
-        difficulty_timer = 0  # Reset the timer
+        obstacle_speed += speed_increase  # Increase speed by predefined increment
+        difficulty_timer = 0  # Reset the difficulty timer
 
-# Check if the character collides with any of the obstacles
+# Function to check if the character collides with an obstacle
 def check_collision():
-    """Check if the character collides with an obstacle."""
+    """Detect collision between character and obstacles."""
     for obstacle in obstacles:
+        # Collision detection based on bounding box overlap
         if (obstacle['x'] < character_x + character_size and
             obstacle['x'] + obstacle_width > character_x and
             obstacle['y'] < character_y + character_size and
             obstacle['y'] + obstacle['height'] > character_y):
             print(f"Game Over! Your score: {score}")
-            reset_game()  # Call custom function to reset the game
+            reset_game()  # Call game reset function if collision occurs
 
-# Custom function to reset the game after a collision
+# Function to reset the game state after collision
 def reset_game():
-    """Reset the game state after the player collides with an obstacle."""
+    """Reset game elements to initial values after a collision."""
     global score, obstacle_speed, obstacles, is_jumping
     is_jumping = False  # Reset jumping state
-    score = 0  # Reset score
-    obstacle_speed = 5  # Reset obstacle speed to default
+    score = 0  # Reset score to zero
+    obstacle_speed = 5  # Reset speed to default
     obstacles.clear()  # Clear all obstacles
-    create_obstacle()  # Create the first obstacle again
+    create_obstacle()  # Create a starting obstacle
 
-# Render (draw) the character, obstacles, score, and background on the screen
+# Function to render all game visuals, including the character and obstacles
 def render_screen():
-    """Render the game elements on the screen."""
-    screen.fill(LIGHT_GREEN)  # Fill the background with light green
+    """Draw all game elements on the screen."""
+    screen.fill(LIGHT_GREEN)  # Background color for the ground
 
-    # Draw the character as a red square
+    # Draw character as a square with red color
     pygame.draw.rect(screen, RED, (character_x, character_y, character_size, character_size))
 
-    # Iterate through the list of obstacles and draw each one
+    # Iterate through obstacles and draw each one
     for obstacle in obstacles:
         pygame.draw.rect(screen, BLACK, (obstacle['x'], obstacle['y'], obstacle_width, obstacle['height']))
 
-    # Render the score and high score
+    # Display the current score and high score
     render_text(f'Score: {score}', 10, 10)
     render_text(f'High Score: {high_score}', 10, 40)
 
-    # Update the display after drawing all elements
+    # Update display to reflect drawn elements
     pygame.display.flip()
 
-# Helper function to display text on the screen
+# Function to render text on the screen for displaying information
 def render_text(text, x, y):
-    """Render text on the screen at the given (x, y) coordinates."""
+    """Render specified text at a specific screen position."""
     font = pygame.font.SysFont(None, 36)
     label = font.render(text, True, BLACK)
     screen.blit(label, (x, y))
 
-# Main game loop
+# Main game loop function
 def game_loop():
-    """Main game loop to keep the game running."""
+    """Primary game loop that keeps the game running."""
     global high_score
-    create_obstacle()  # Generate the first obstacle at the start
+    create_obstacle()  # Initialize with a single obstacle
 
     while True:
-        handle_events()  # Handle user input events
+        handle_events()  # Process user input
         update_character()  # Update character position
-        update_obstacles()  # Move and create obstacles
-        increase_difficulty()  # Make the game harder over time
-        check_collision()  # Check if the character hits any obstacle
-        render_screen()  # Render everything on the screen
+        update_obstacles()  # Move and manage obstacles
+        increase_difficulty()  # Adjust difficulty over time
+        check_collision()  # Check for collisions
+        render_screen()  # Render all game elements
         high_score = max(high_score, score)  # Update high score
-        clock.tick(30)  # Set the frame rate
+        clock.tick(30)  # Control the game's frame rate
 
-# Run the game
+# Run the game loop if the script is executed directly
 if __name__ == "__main__":
     game_loop()
