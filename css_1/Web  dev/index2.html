@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index2.css">
+    <title>Eco Marketplace</title>
+</head>
+<body>
+    <header>
+        <div class="logo">Eco Marketplace</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Your Eco-Friendly Marketplace</h1>
+        </section>
+
+        <section id="categories" class="categories">
+            <h2>Explore Categories</h2>
+            <div class="categories-container">
+                <button class="arrow left" onclick="scrollLeft()">&#9664;</button>
+                <div class="categories-wrapper">
+                    <div class="category-card">
+                        <img src="dental_hygiene.jpg" alt="Dental Hygiene">
+                        <div class="category-title">Dental Hygiene</div>
+                    </div>
+                    <div class="category-card">
+                        <img src="personal_hygiene.jpg" alt="Personal Hygiene">
+                        <div class="category-title">Personal Hygiene</div>
+                    </div>
+                    <div class="category-card">
+                        <img src="pet_care.jpg" alt="Pet Care">
+                        <div class="category-title">Pet Care</div>
+                    </div>
+                    <div class="category-card">
+                        <img src="outdoor_living.jpg" alt="Outdoor Living">
+                        <div class="category-title">Outdoor Living</div>
+                    </div>
+                    <div class="category-card">
+                        <img src="kitchen_supplies.jpg" alt="Kitchen Supplies">
+                        <div class="category-title">Kitchen Supplies</div>
+                    </div>
+                </div>
+                <button class="arrow right" onclick="scrollRight()">&#9654;</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
