@@ -74,12 +74,14 @@ nav ul li a:hover {
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
 }
 #utensils{
     background-image: url('Utencils.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
 
 }
 #food{
@@ -87,6 +89,7 @@ nav ul li a:hover {
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
 
 }
 
@@ -157,7 +160,6 @@ footer {
     text-align: center;
     padding: 20px;
     color: #000; /* Change based on design */
-boarder color: red;
 }
 
 
@@ -172,4 +174,28 @@ boarder color: red;
     background-color: #ff5722; /* Change color as needed */
     border-radius: 50%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#utencil1 {
+    background-image: url('Cookingfork.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil2 {
+    background-image: url('Spoon2.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil3 {
+    background-image: url('Knives.png');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
 }

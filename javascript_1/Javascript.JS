@@ -123,3 +123,18 @@ style.innerHTML = `
     }
 `;
 document.head.appendChild(style);
+
+let index = 0;
+const slides = document.querySelector(".slides");
+const totalSlides = document.querySelectorAll(".slide").length;
+
+function showSlide(i) {
+    index = (i + totalSlides) % totalSlides; // Wrap around
+    slides.style.transform = `translateX(${-index * 500}px)`;
+}
+
+function nextSlide() { showSlide(index + 1); }
+function prevSlide() { showSlide(index - 1); }
+
+// Auto-slide every 3 seconds
+setInterval(nextSlide, 3000);
