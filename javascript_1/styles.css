@@ -77,7 +77,7 @@ nav ul li a:hover {
     min-height: 140px; /* Ensures consistent height */
 }
 #utensils{
-    background-image: url('Utencils.jpg');
+    background-image: url('images/Utencils.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -149,20 +149,21 @@ footer {
 /* Banner Styling */
 .banner {
     width: 100%;
-    min-height: 450px; /* Adjust height based on preference */
-    background-image: url('your-banner-image.jpg'); /* Use a high-quality image */
-    background-color: white;
+    min-height: 450px;
+    background-image: url("https://res.cloudinary.com/sagacity/image/upload/c_crop,h_3333,w_5000,x_0,y_0/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_auto/SeptemberShop-courtesy_gb1yug.jpg");
+    background-color: rgba(255, 255, 255, 0.5);
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 20px;
-    color: #000; /* Change based on design */
+    color: #000;
+    position: relative; /* Ensures it stays in place */
+    z-index: 1;
 }
-
-
 
 /* Circle in the top right corner */
 .circle {
@@ -177,7 +178,7 @@ footer {
 }
 
 #utencil1 {
-    background-image: url('Cookingfork.jpg');
+    background-image: url('images/Cookingfork.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -185,7 +186,7 @@ footer {
 }
 
 #utencil2 {
-    background-image: url('upscalemedia-transformed.jpeg');
+    background-image: url('images/Wooden spoons.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -193,7 +194,7 @@ footer {
 }
 
 #utencil3 {
-    background-image: url('images/Knives.png');
+    background-image: url('images/Knives2.jpeg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -201,7 +202,7 @@ footer {
 }
 
 #utencil4 {
-    background-image: url('Bowls_enhanced.jpg');
+    background-image: url('images/Bowls_enhanced.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -209,7 +210,7 @@ footer {
 }
 
 #utencil5 {
-    background-image: url('plates_enhanced.jpg');
+    background-image: url('images/plates_enhanced.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -219,4 +220,27 @@ footer {
 #banner {
     background-image: url('main_image_enhanced.jpeg');
     
+}
+
+#utencil6 {
+    background-image: url('images/Spatula.png');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil7 {
+    background-image: url('images/Chopsticks.png');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+#utencil8 {
+    background-image: url('images/Bamboo-Tongs_enhanced.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
 }
