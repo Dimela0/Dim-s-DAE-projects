@@ -70,7 +70,7 @@ nav ul li a:hover {
 
 /* Specific background image for Clothes */
 #clothes {
-    background-image: url('cloths.png');
+    background-image: url('images/cloths.png');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -85,7 +85,7 @@ nav ul li a:hover {
 
 }
 #food{
-    background-image: url('Food.jpg');
+    background-image: url('images/Food.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -178,7 +178,7 @@ footer {
 }
 
 #utencil1 {
-    background-image: url('images/Cookingfork.jpg');
+    background-image: url('images/Fork 2.0.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -186,7 +186,7 @@ footer {
 }
 
 #utencil2 {
-    background-image: url('images/Wooden spoons.jpg');
+    background-image: url('images/spoons 2.0.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -194,7 +194,7 @@ footer {
 }
 
 #utencil3 {
-    background-image: url('images/Knives2.jpeg');
+    background-image: url('images/Knives 2.0.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -202,7 +202,7 @@ footer {
 }
 
 #utencil4 {
-    background-image: url('images/Bowls_enhanced.jpg');
+    background-image: url('images/Bowls 2.0.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -210,7 +210,7 @@ footer {
 }
 
 #utencil5 {
-    background-image: url('images/plates_enhanced.jpg');
+    background-image: url('images/Plates 2.0.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -218,12 +218,12 @@ footer {
 }
 
 #banner {
-    background-image: url('main_image_enhanced.jpeg');
+    background-image: url('images/background.jpg');
     
 }
 
 #utencil6 {
-    background-image: url('images/Spatula.png');
+    background-image: url('images/Spatula2.0.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -231,14 +231,30 @@ footer {
 }
 
 #utencil7 {
-    background-image: url('images/Chopsticks.png');
+    background-image: url('images/Chopsticks 2.0.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
     min-height: 140px; /* Ensures consistent height */
 }
 #utencil8 {
-    background-image: url('images/Bamboo-Tongs_enhanced.jpg');
+    background-image: url('images/Mug 2.0.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil9 {
+    background-image: url('images/Serving platter2.0.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil10 {
+    background-image: url('images/Napkin 2.0.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */

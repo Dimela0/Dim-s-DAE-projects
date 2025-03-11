@@ -123,3 +123,25 @@ style.innerHTML = `
     }
 `;
 document.head.appendChild(style);
+
+
+
+
+// Array of background image URLs
+const images = [
+    "url('https://res.cloudinary.com/images/Background 3.jpg')",
+    "url('https://www.example.com/images/background.jpg')",
+    "url('https://www.example.com/images/background 2.jpg)"
+];
+
+// Function to change the banner background
+function changeBannerBackground() {
+    let randomIndex = Math.floor(Math.random() * images.length); // Pick a random index
+    document.querySelector(".banner").style.backgroundImage = images[randomIndex];
+}
+
+// Change background every 5 seconds (adjust as needed)
+setInterval(changeBannerBackground, 5000);
+
+// Initialize with a random background
+changeBannerBackground();
