@@ -70,7 +70,7 @@ nav ul li a:hover {
 
 /* Specific background image for Clothes */
 #clothes {
-    background-image: url('images/cloths.png');
+    background-image: url('images/cloths.png'); 
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
@@ -150,7 +150,6 @@ footer {
 .banner {
     width: 100%;
     min-height: 450px;
-    background-image: url("https://res.cloudinary.com/sagacity/image/upload/c_crop,h_3333,w_5000,x_0,y_0/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_auto/SeptemberShop-courtesy_gb1yug.jpg");
     background-color: rgba(255, 255, 255, 0.5);
     background-size: cover;
     background-position: center;
