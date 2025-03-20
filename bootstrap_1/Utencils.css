@@ -1,0 +1,35 @@
+#utencil1 {
+    background-image: url('forkcase.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil2 {
+    background-image: url('spoons.jpg'); /* Make sure this image exists */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#utencil3 {
+    background-image: url('knives.jpg'); /* Make sure this image exists */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+.flex-box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    padding: 50px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}

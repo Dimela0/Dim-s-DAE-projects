@@ -1,0 +1,283 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(to top, #132a13, #183218, #1e3a1c, #234221, #294b26, #2d5228, #32582b, #375f2d, #3c652d, #426b2e, #48712d, #4f772d);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* Header styling */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #bfff00;
+    margin: 10px 0;
+}
+
+nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Flex container */
+.flex-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Individual flex boxes */
+.flex-box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    padding: 50px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+/* Specific background image for Clothes */
+#clothes {
+    background-image: url('images/cloths.png'); 
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+#utensils{
+    background-image: url('images/Utencils.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+
+}
+#food{
+    background-image: url('images/Food.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+
+}
+
+/* Hover effect */
+.flex-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Background for text inside boxes */
+.text-bg {
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Icon styling */
+.icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: #ff5722;
+}
+
+/* Ensure full-page layout */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make the main content area expand */
+main {
+    flex: 1; /* Pushes footer down */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Sticky footer */
+footer {
+    position: sticky;
+    background-image: linear-gradient(to bottom, #90a955, #a7bb67, #bdcd79, #d5e08b, #ecf39e);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 102%;
+}
+
+/*Utesils styling section
+
+/* Banner Styling */
+.banner {
+    width: 100%;
+    min-height: 450px;
+    background-color: rgba(255, 255, 255, 0.5);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    color: #000;
+    position: relative; /* Ensures it stays in place */
+    z-index: 0;
+    transition: background-image 1s ease-in-out;
+}
+
+/* Circle in the top right corner */
+.circle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: #ff5722; /* Change color as needed */
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#utencil1 {
+    background-image: url('images/Fork 2.0.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil2 {
+    background-image: url('images/spoons 2.0.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil3 {
+    background-image: url('images/Knives 2.0.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil4 {
+    background-image: url('images/Bowls 2.0.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil5 {
+    background-image: url('images/Plates 2.0.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#banner {
+    background-image: url('images/background.jpg');
+    
+}
+
+#utencil6 {
+    background-image: url('images/Spatula2.0.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil7 {
+    background-image: url('images/Chopsticks 2.0.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+#utencil8 {
+    background-image: url('images/Mug 2.0.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil9 {
+    background-image: url('images/Serving platter2.0.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+#utencil10 {
+    background-image: url('images/Napkin 2.0.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
+/* ... your existing styles ... */
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute; /* Or fixed, depending on desired position */
+    bottom: 20px;  /* Adjust positioning as needed */
+    right: 20px;  /* Adjust positioning as needed */
+    z-index: 1; /* Ensure it's above other elements */
+}
