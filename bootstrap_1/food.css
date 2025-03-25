@@ -123,15 +123,15 @@ main {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-#clothes1 {
-    background-image: url('Images 2/Hoodies.jpg');
+#Food1 {
+    background-image: url('Fruit and vegitable pictures/Vegitables.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
     min-height: 140px; /* Ensures consistent height */
 }
 
-#clothes2 {
+#Food2 {
     background-image: url('Images 2/Sweaters.jpg');
     background-size: cover;
     background-position: center;
@@ -139,7 +139,7 @@ main {
     min-height: 140px; /* Ensures consistent height */
 }
 
-#clothes3 {
+#Food3 {
     background-image: url('Images 2/Jackets.jpg');
     background-size: cover;
     background-position: center;
@@ -147,7 +147,7 @@ main {
     min-height: 140px; /* Ensures consistent height */
 }
 
-#clothes4 {
+#Food4 {
     background-image: url('Images 2/Tshirts.jpg');
     background-size: cover;
     background-position: center;

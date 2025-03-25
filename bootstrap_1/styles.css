@@ -3,12 +3,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: linear-gradient(to top, #132a13, #183218, #1e3a1c, #234221, #294b26, #2d5228, #32582b, #375f2d, #3c652d, #426b2e, #48712d, #4f772d);
+    background-image: linear-gradient(to top, #4f772d, #4f772d); /* Use one color for both start and end */
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
 }
+
+
 
 /* Header styling */
 header {
@@ -276,7 +278,7 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
-    position: absolute; /* Or fixed, depending on desired position */
+    position: relative; /* Or fixed, depending on desired position */
     bottom: 20px;  /* Adjust positioning as needed */
     right: 20px;  /* Adjust positioning as needed */
     z-index: 1; /* Ensure it's above other elements */
