@@ -2,50 +2,256 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Slideshow</title>
-    
-    <!-- Bootstrap CSS (CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .floating-circle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .banner {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 20px;
+        }
+
+        /* Ensures images scale properly on smaller screens */
+        .flex-box {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .flex-box div {
+            width: 32%; /* Three boxes per row on medium screens */
+            background: lightgray;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Media query for small screens */
+        @media (max-width: 768px) {
+            .flex-box div {
+                width: 48%; /* Two boxes per row on small screens */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .flex-box div {
+                width: 100%; /* One box per row on extra small screens */
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Bootstrap Carousel -->
-    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-        
-        <!-- Slide Indicators -->
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true"></button>
-            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
-        </div>
-
-        <!-- Slides -->
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://www.google.com/imgres?q=cookies&imgurl=https%3A%2F%2Fcdn.loveandlemons.com%2Fwp-content%2Fuploads%2F2024%2F08%2Fchocolate-chip-cookie-recipe.jpg&imgrefurl=https%3A%2F%2Fwww.loveandlemons.com%2Fchocolate-chip-cookies%2F&docid=YAEzLFonWKVQrM&tbnid=XwF-a3-4TwwQ3M&vet=12ahUKEwjQ68v21JmMAxWxGVkFHVh5HYYQM3oECHMQAA..i&w=1160&h=1160&hcb=2&itg=1&ved=2ahUKEwjQ68v21JmMAxWxGVkFHVh5HYYQM3oECHMQAA" class="d-block w-100" alt="Slide 1">
-            </div>
-            <div class="carousel-item">
-                <img src="https://via.placeholder.com/800x400/7fafff/333333?text=Slide+2" class="d-block w-100" alt="Slide 2">
-            </div>
-            <div class="carousel-item">
-                <img src="https://via.placeholder.com/800x400/7fff7f/333333?text=Slide+3" class="d-block w-100" alt="Slide 3">
-            </div>
-        </div>
-
-        <!-- Prev & Next Buttons -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+<!-- Navbar with Bootstrap classes -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Brand</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Banner with changing background -->
+<div class="banner"></div>
+
+<!-- Product Sections (with Flexbox) -->
+<div class="container">
+    <div class="flex-box">
+        <div>Section 1</div>
+        <div>Section 2</div>
+        <div>Section 3</div>
+    </div>
+</div>
+
+<!-- Floating Circle -->
+<div class="floating-circle"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Wait for the document to fully load
+document.addEventListener("DOMContentLoaded", function () {
+    // Select all navigation links
+    let navLinks = document.querySelectorAll("nav ul li a");
+
+    // Loop through each link and add a click event listener
+    navLinks.forEach(link => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default page reload
+            window.location.href = this.href; // Redirect to the link
+        });
+    });
+
+    // Select all product sections
+    let sections = document.querySelectorAll(".flex-box div");
+
+    // Add event listeners for each section
+    sections.forEach(section => {
+        section.addEventListener("click", function () {
+            // Change background color when clicked
+            this.style.backgroundColor = "#dfffd6"; // Light green background
+            setTimeout(() => {
+                this.style.backgroundColor = ""; // Reset color after 1 second
+            }, 1000);
+        });
+    });
+
+    // Create a floating circle in the top right
+    let circle = document.createElement("div");
+    circle.classList.add("floating-circle");
+    document.body.appendChild(circle);
+});
+
+// Background image rotation for banner
+const images = [
+    "./images/background.jpg",
+    "./images/background_2.jpg",
+    "./images/background_3.jpg"
+];
+
+let currentIndex = 0;
+
+function changeBannerBackground() {
+    let banner = document.querySelector(".banner");
+    if (!banner) {
+        console.error("Error: No element with class 'banner' found!");
+        return;
+    }
+    banner.style.backgroundImage = `url(${images[currentIndex]})`;
+    currentIndex = (currentIndex + 1) % images.length;
+}
+
+// Change the banner background every 5 seconds
+setInterval(changeBannerBackground, 5000);
+changeBannerBackground();
+</script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Boxes</title>
+    <!-- Link to Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1 class="text-center my-4">SHOP SUSTAINABLY FOR A BETTER FUTURE</h1>
+
+        <!-- Navigation Menu (Bootstrap Navbar Component) -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Sustainable Shop</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Utencils.html">Tableware</a></li>
+                        <li class="nav-item"><a class="nav-link" href="clothes.html">Clothes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Food.html">Food</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner Section -->
+    <div class="banner text-center" id="banner" style="background-image: url('./images/banner.jpg'); background-size: cover; height: 250px; color: white;">
+        <h1>WELCOME TO SHOPPING SUSTAINABLY FOR A BETTER FUTURE!</h1>
     </div>
 
-    <!-- Bootstrap Bundle (JS included for carousel functionality) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Main Content Section (Bootstrap Grid System) -->
+    <main class="container my-5">
+        <div class="row">
+            <!-- Card for Utensils -->
+            <div class="col-md-4 mb-4">
+                <a href="Utencils.html">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="icon mb-3" style="background-color: #f0f0f0; height: 150px; border-radius: 5px;"></div>
+                            <h5 class="card-title">Utensils</h5>
+                            <p class="card-text">Includes forks, knives, spoons, and more.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
+            <!-- Card for Clothes -->
+            <div class="col-md-4 mb-4">
+                <a href="clothes.html">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="icon mb-3" style="background-color: #f0f0f0; height: 150px; border-radius: 5px;"></div>
+                            <h5 class="card-title">Clothes</h5>
+                            <p class="card-text">Find trendy fashion for every occasion.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Card for Food -->
+            <div class="col-md-4 mb-4">
+                <a href="Food.html">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="icon mb-3" style="background-color: #f0f0f0; height: 150px; border-radius: 5px;"></div>
+                            <h5 class="card-title">Food</h5>
+                            <p class="card-text">Fresh and delicious options for meals and snacks.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="text-center py-4">
+        <p>&copy; 2025 Sustainable Shopping | All rights reserved</p>
+    </footer>
+
+    <!-- Link to Bootstrap JS (required for navbar toggle) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="javascript.js"></script>
 </body>
 </html>
