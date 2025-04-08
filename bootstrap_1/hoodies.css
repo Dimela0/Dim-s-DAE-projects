@@ -123,72 +123,64 @@ main {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-#Broccoli {
-    background-image: url('Vegitableoptions/Broccoli.jpg');
+#RedHoodie {
+    background-image: url('Hoodies/redhoodie.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
     min-height: 140px; /* Ensures consistent height */
 }
 
-#Cabbage {
-    background-image: url('Fruit and vegitable pictures/Cabbages.jpg');
+#BlueHoodie {
+    background-image: url('Hoodies/bluehoodie.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
     min-height: 140px; /* Ensures consistent height */
 }
 
-#Potatoes {
-    background-image: url('Fruit and vegitable pictures/Potatoes.jpg');
+#GreenHoodie {
+    background-image: url('Hoodies/greenhoodie.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
     min-height: 140px; /* Ensures consistent height */
 }
 
-#Peppers {
-    background-image: url('Fruit and vegitable pictures/Peppers.jpg');
+#YellowHoodie {
+    background-image: url('Hoodies/yellowhoodie.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
     min-height: 140px; /* Ensures consistent height */
 }
 
-#Onions {
-    background-image: url('Fruit and vegitable pictures/Onions.jpg');
+#BlackHoodie {
+    background-image: url('Hoodies/blackhoodie.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
     min-height: 140px; /* Ensures consistent height */
 }
 
-#Onions {
-    background-image: url('Fruit and vegitable pictures/Onions.jpg');
+#WhiteHoodie {
+    background-image: url('Hoodies/whitehoodie.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
     min-height: 140px; /* Ensures consistent height */
 }
 
-#Cucumbers {
-    background-image: url('Fruit and vegitable pictures/Cucumbers.jpg');
+#PurpleHoodie {
+    background-image: url('Hoodies/purplehoodie.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
     min-height: 140px; /* Ensures consistent height */
 }
 
-#Sweetcorn {
-    background-image: url('Fruit and vegitable pictures/Sweet Corn.jpg');
-    background-size: cover;
-    background-position: center;
-    color: white; /* Make text readable */
-    min-height: 140px; /* Ensures consistent height */
-}
-
-#Carrots {
-    background-image: url('Fruit and vegitable pictures/Carrots.jpg');
+#GreyHoodie {
+    background-image: url('Hoodies/Grayhoodie.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
