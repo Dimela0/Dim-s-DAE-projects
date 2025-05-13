@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Add this near the top of your <body> -->
+<button id="openSignup" class="btn">Sign Up</button>
+
+<!-- Modal Markup -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <span id="closeSignup" class="close">&times;</span>
+    <h2>Create Account</h2>
+    <form id="signupForm">
+      <label for="email">Email</label>
+      <input type="email" id="email" required />
+      
+      <label for="password">Password</label>
+      <input type="password" id="password" required minlength="6" />
+      
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" required minlength="6" />
+      
+      <button type="submit" class="btn">Sign Up</button>
+      <p id="signupError" class="error"></p>
+    </form>
+  </div>
+</div>
+
+<style>
+  /* Button */
+  .btn {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: .25rem;
+    cursor: pointer;
+  }
+  .btn:hover { background: #45a049; }
+
+  /* Modal overlay */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+  }
+  /* Modal box */
+  .modal-content {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: .5rem;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+  }
+  .close {
+    position: absolute;
+    top: .5rem; right: .75rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  /* Form */
+  form { display: flex; flex-direction: column; gap: .75rem; }
+  label { font-weight: bold; }
+  input {
+    padding: .5rem;
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+    font-size: 1rem;
+  }
+  .error {
+    color: red;
+    font-size: .9rem;
+  }
+</style>
+
+<script type="module">
+  import { auth } from './firebaseConfig.js';
+  import { createUserWithEmailAndPassword } from 
+    'https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js';
+
+  // Elements
+  const modal     = document.getElementById('signupModal');
+  const openBtn   = document.getElementById('openSignup');
+  const closeBtn  = document.getElementById('closeSignup');
+  const form      = document.getElementById('signupForm');
+  const emailIn   = document.getElementById('email');
+  const passIn    = document.getElementById('password');
+  const confirmIn = document.getElementById('confirmPassword');
+  const errorP    = document.getElementById('signupError');
+
+  // Show modal
+  openBtn.addEventListener('click', () => {
+    errorP.textContent = '';
+    form.reset();
+    modal.style.display = 'flex';
+  });
+  // Hide modal
+  closeBtn.addEventListener('click', () => modal.style.display = 'none');
+  window.addEventListener('click', e => {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+
+  // Handle signup
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    errorP.textContent = '';
+    const email = emailIn.value.trim();
+    const pass  = passIn.value;
+    const conf  = confirmIn.value;
+
+    if (pass !== conf) {
+      errorP.textContent = 'Passwords do not match.';
+      return;
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, pass);
+      modal.style.display = 'none';
+      alert('Account created! You are now signed in.');
+    } catch (err) {
+      errorP.textContent = err.message;
+    }
+  });
+</script>
+
+</body>
+</html>
