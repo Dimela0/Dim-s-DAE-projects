@@ -113,13 +113,6 @@ nav ul li a:hover {
     margin: 0 auto;
 }
 
-/* Icon styling */
-.icon {
-    font-size: 40px;
-    margin-bottom: 15px;
-    color: #ff5722;
-}
-
 /* Ensure full-page layout */
 html, body {
     height: 100%;
@@ -166,18 +159,6 @@ footer {
     position: relative; /* Ensures it stays in place */
     z-index: 0;
     transition: background-image 1s ease-in-out;
-}
-
-/* Circle in the top right corner */
-.circle {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 60px;
-    height: 100px;
-    background-color: #ff5722; /* Change color as needed */
-    border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 #utencil1 {
@@ -285,15 +266,19 @@ footer {
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     transition: transform 0.2s, box-shadow 0.2s;
-  }
+    top: 20px;
+    right: 20px;
+    .my-element {
+        border: 2px solid red;
+    }
+
+
+}
+
   
   .circle-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   }
   
-  /* reuse the modal styles from before */
-  .modal { /* ... */ }
-  .modal-content { /* ... */ }
-  /* etc. */
-  
+

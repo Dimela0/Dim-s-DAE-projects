@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sustainability Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #dashboard-container {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .item-card {
+      margin: 1rem 0;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #f9f9f9;
+    }
+
+    .item-card img {
+      width: 150px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-right: 10px;
+      margin-top: 8px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SHOP SUSTAINABLY FOR A BETTER FUTURE</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Utencils.html">Tableware</a></li>
+        <li><a href="clothes.html">Clothes</a></li>
+        <li><a href="Food.html">Food</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="dashboard-container">
+    <h2>Welcome to the Dashboard</h2>
+    <p id="authStatus">Checking login status...</p>
+    <button id="logoutBtn" class="btn hidden">Logout</button>
+
+    <hr>
+
+    <h3>Add a New Sustainable Item</h3>
+    <form id="addItemForm">
+      <input type="text" id="itemName" placeholder="Item Name" required><br><br>
+      <input type="file" id="itemImage" required><br><br>
+      <button type="submit" class="btn">Add Item</button>
+    </form>
+
+    <hr>
+
+    <h3>Your Items</h3>
+    <div id="itemList"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sustainable Shopping | All rights reserved</p>
+  </footer>
+
+  <!-- Firebase & Dashboard Logic -->
+  <script type="module">
+    import { auth } from './firebaseConfig.js';
+    import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js';
+    import { db, storage } from './firebaseConfig.js';
+    import {
+      collection, addDoc, getDocs, updateDoc, deleteDoc, doc
+    } from 'https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js';
+    import {
+      ref, uploadBytes, getDownloadURL
+    } from 'https://www.gstatic.com/firebasejs/11.7.1/firebase-storage.js';
+
+    const authStatus = document.getElementById('authStatus');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const form = document.getElementById('addItemForm');
+    const itemList = document.getElementById('itemList');
+
+    // 🔐 Show/hide based on auth
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        authStatus.textContent = `Logged in as: ${user.email}`;
+        logoutBtn.classList.remove('hidden');
+        form.classList.remove('hidden');
+        fetchItems();
+      } else {
+        authStatus.textContent = "Please log in to access this page.";
+        logoutBtn.classList.add('hidden');
+        form.classList.add('hidden');
+      }
+    });
+
+    logoutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      location.href = "index.html";
+    });
+
+    // 📥 Add item + image
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('itemName').value.trim();
+      const file = document.getElementById('itemImage').files[0];
+
+      if (!name || !file) return;
+
+      const imgRef = ref(storage, 'media/' + file.name);
+      await uploadBytes(imgRef, file);
+      const url = await getDownloadURL(imgRef);
+
+      await addDoc(collection(db, "items"), {
+        name,
+        imageUrl: url
+      });
+
+      form.reset();
+      fetchItems();
+    });
+
+    // 🧾 Load existing items
+    async function fetchItems() {
+      itemList.innerHTML = "";
+      const snapshot = await getDocs(collection(db, "items"));
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const div = document.createElement('div');
+        div.classList.add('item-card');
+        div.innerHTML = `
+          <strong>${data.name}</strong><br>
+          <img src="${data.imageUrl}" /><br>
+          <button onclick="editItem('${docSnap.id}', '${data.name}')">Edit</button>
+          <button onclick="deleteItem('${docSnap.id}')">Delete</button>
+        `;
+        itemList.appendChild(div);
+      });
+    }
+
+    // 🗑 Delete
+    window.deleteItem = async (id) => {
+      await deleteDoc(doc(db, "items", id));
+      fetchItems();
+    };
+
+    // ✏️ Update
+    window.editItem = async (id, oldName) => {
+      const newName = prompt("Enter new name", oldName);
+      if (newName) {
+        await updateDoc(doc(db, "items", id), { name: newName });
+        fetchItems();
+      }
+    };
+  </script>
+</body>
+</html>
