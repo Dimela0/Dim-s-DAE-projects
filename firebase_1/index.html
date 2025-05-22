@@ -1,75 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flex Boxes</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flex Boxes</title>
+  <link rel="stylesheet" href="styles.css"/>
+
+  <!-- ✅ Preload banner images for faster slideshow -->
+  <link rel="preload" as="image" href="images/background.jpg">
+  <link rel="preload" as="image" href="images/background_2.jpg">
+  <link rel="preload" as="image" href="images/background_3.jpg">
+
+  <style>
+    /* Circle Log In Button Styling */
+    .circle-button {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      line-height: 70px;
+      text-decoration: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .circle-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    /* Banner Styling */
+    .banner {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.5s ease-in-out;
+      z-index: 1;
+    }
+
+    .banner-text {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      font-size: 2em;
+      font-weight: bold;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Header Section -->
-    <header>
-        <h1>SHOP SUSTAINABLY FOR A BETTER FUTURE</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="Utencils.html">Tableware</a></li>
-                <li><a href="clothes.html">Clothes</a></li>
-                <li><a href="Food.html">Food</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Header Section -->
+  <header>
+    <h1>SHOP SUSTAINABLY FOR A BETTER FUTURE</h1>
+    <nav role="navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Utencils.html">Tableware</a></li>
+        <li><a href="clothes.html">Clothes</a></li>
+        <li><a href="Food.html">Food</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <div class="banner" id="banner">
-        <h1>WELCOME TO SHOPPING SUSTAINABLY FOR A BETTER FUTURE!</h1>
+  <!-- ✅ Slideshow Banner -->
+  <div class="banner" id="banner">
+    <img id="bannerImage" src="images/background.jpg" alt="Banner Image" />
+    <h1 class="banner-text">WELCOME TO SHOPPING SUSTAINABLY FOR A BETTER FUTURE!</h1>
+  </div>
+
+  <!-- Main Content Section -->
+  <main class="flex-container" role="main">
+    <div>
+      <a href="Utencils.html">
+        <div class="flex-box" id="utensils">
+          <div class="icon" aria-hidden="true"></div>
+          <div class="text-bg">
+            <h3>Utensils</h3>
+            <p>Includes forks, knives, spoons, and more.</p>
+          </div>
+        </div>
+      </a>
     </div>
 
-    <!-- Main Content Section -->
-    <main class="flex-container">
-        <div>
-            <a href="Utencils.html"> 
-                <div class="flex-box" id="utensils">
-                    <div class="icon"></div>
-                    <div class="text-bg">
-                        <h3>Utensils</h3>
-                        <p>Includes forks, knives, spoons, and more.</p>
-                    </div>
-                </div>
-            </a>
+    <a href="clothes.html">
+      <div class="flex-box" id="clothes">
+        <div class="icon" aria-hidden="true"></div>
+        <div class="text-bg">
+          <h3>Clothes</h3>
+          <p>Find trendy fashion for every occasion.</p>
         </div>
-       
-        <a href="clothes.html">
-            <div class="flex-box" id="clothes">
-                <div class="icon"></div>
-                <div class="text-bg">
-                    <h3>Clothes</h3>
-                    <p>Find trendy fashion for every occasion.</p>
-                </div>
-            </div>
-        </a>
+      </div>
+    </a>
 
-        <a href="Food.html">
-            <div class="flex-box" id="food">
-                <div class="icon"></div>
-                <div class="text-bg">
-                    <h3>Food</h3>
-                    <p>Fresh and delicious options for meals and snacks.</p>
-                </div>
-            </div>
-        </a>
-    </main>
+    <a href="Food.html">
+      <div class="flex-box" id="food">
+        <div class="icon" aria-hidden="true"></div>
+        <div class="text-bg">
+          <h3>Food</h3>
+          <p>Fresh and delicious options for meals and snacks.</p>
+        </div>
+      </div>
+    </a>
+  </main>
 
-    <!-- Sign Up Button -->
-    <a href="Signup.html" id="signupCircle" class="circle-button">Sign Up</a>
+  <!-- Log In / Profile Circle Button -->
+  <a href="Login.html" id="signupCircle" class="circle-button">Log in</a>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 Sustainable Shopping | All rights reserved</p>
-    </footer>
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 Sustainable Shopping | All rights reserved</p>
+  </footer>
 
-    <!-- Scripts -->
-    <script src="javascript.js"></script>
-    <script type="module" src="firebaseConfig.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+
+  <!-- Firebase Config & Auth (You already include logic in JS file) -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDIDvX9YnYDVjE-0RXVtlpiRwXAP5oJt8g",
+      authDomain: "environmental-sustainabi-37bbd.firebaseapp.com",
+      projectId: "environmental-sustainabi-37bbd",
+      storageBucket: "environmental-sustainabi-37bbd.appspot.com",
+      messagingSenderId: "720844755527",
+      appId: "1:720844755527:web:3c04786dfc4aa46f5b9762",
+      measurementId: "G-BF966X7HXR"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <!-- ✅ Your External JavaScript for Firebase auth, buttons, and slideshow -->
+  <script src="javascript.js"></script>
 </body>
 </html>

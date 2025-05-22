@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vegetable Checkout</title>
+  <link rel="stylesheet" href="Vegitable checkout.css">
+</head>
+<body>
+  <h2>Select a Vegetable</h2>
+
+  <div class="vegetables">
+    <button onclick="selectItem('Broccoli')">Broccoli</button>
+    <button onclick="selectItem('Cabbage')">Cabbage</button>
+    <button onclick="selectItem('Potatoes')">Potatoes</button>
+    <button onclick="selectItem('Peppers')">Peppers</button>
+    <button onclick="selectItem('Onions')">Onions</button>
+    <button onclick="selectItem('Cucumbers')">Cucumbers</button>
+    <button onclick="selectItem('Sweetcorn')">Sweetcorn</button>
+    <button onclick="selectItem('Carrots')">Carrots</button>
+  </div>
+
+  <div class="quality-menu" id="qualityMenu" style="display: none;">
+    <label for="qualitySelect">
+      Choose quality for <span id="selectedItemName"></span>:
+    </label><br>
+
+    <select id="qualitySelect">
+      <option value="standard">Standard</option>
+      <option value="organic">Organic</option>
+      <option value="septic">Septic</option>
+    </select><br><br>
+
+    <label for="poundsInput">Pounds:</label>
+    <input type="number" id="poundsInput" min="0.1" step="0.1" value="1"><br><br>
+
+    <button onclick="addToCartWithQuality()">Add to Cart</button>
+  </div>
+
+  <div class="cart">
+    <h2>Your Cart</h2>
+    <ul id="cart-items"></ul>
+    <p>Total: $<span id="total">0.00</span></p>
+    <button onclick="checkout()">Checkout</button>
+  </div>
+
+  <div class="payment-screen" id="paymentScreen" style="display: none;">
+    <h2>Payment Details</h2>
+    <form id="paymentForm" onsubmit="return processPayment(event)">
+      <label>
+        Name on Card:<br>
+        <input type="text" required>
+      </label><br><br>
+
+      <label>
+        Card Number:<br>
+        <input type="text" pattern="\d{16}" maxlength="16" required>
+      </label><br><br>
+
+      <label>
+        Expiry Date:<br>
+        <input type="month" required>
+      </label><br><br>
+
+      <label>
+        CVV:<br>
+        <input type="text" pattern="\d{3}" maxlength="3" required>
+      </label><br><br>
+
+      <label>
+        Payment Type:<br>
+        <select required>
+          <option value="debit">Debit</option>
+          <option value="credit">Credit</option>
+        </select>
+      </label><br><br>
+
+      <button type="submit">Pay Now</button>
+    </form>
+  </div>
+
+  <script src="Vegitable checkout.JS"></script>
+</body>
+</html>

@@ -1,141 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sign Up | Sustainable Shopping</title>
-  <!-- Bootstrap CSS for layout -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-  <style>
-    body {
-      background: #f5f5f5;
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .card {
-      border: none;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 380px;
-      padding: 2rem;
-    }
-    .form-control {
-      height: 48px;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-    .btn-primary {
-      background-color: #2f855a;
-      border: none;
-      border-radius: 6px;
-      height: 48px;
-      font-size: 1rem;
-    }
-    .btn-primary:hover {
-      background-color: #276749;
-    }
-    .small-link {
-      font-size: 0.9rem;
-      text-align: center;
-      margin-top: 1rem;
-    }
-    #signupError {
-      color: red;
-      text-align: center;
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-    }
-  </style>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <title>Sign Up</title>
+ <style>
+   body {
+     font-family: Arial, sans-serif;
+     background-color: #f5f5f5;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+   }
+
+
+   .signup-container {
+     background-color: white;
+     padding: 30px;
+     border-radius: 8px;
+     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+     width: 300px;
+   }
+
+
+   .signup-container h2 {
+     margin-bottom: 20px;
+     text-align: center;
+   }
+
+
+   input[type="text"],
+   input[type="email"],
+   input[type="password"],
+   input[type="file"] {
+     width: 100%;
+     padding: 10px;
+     margin: 10px 0;
+     border-radius: 4px;
+     border: 1px solid #ccc;
+   }
+
+
+   button {
+     width: 100%;
+     padding: 10px;
+     background-color: #4CAF50;
+     color: white;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+   }
+
+
+   .login-link {
+     text-align: center;
+     margin-top: 15px;
+   }
+ </style>
 </head>
 <body>
-  <div class="card">
-    <!-- Header -->
-    <h2 class="text-center mb-2">Sign Up</h2>
-    <p class="text-center text-muted small mb-4">
-      Create your account by entering your email and password
-    </p>
 
-    <!-- Form -->
-    <form id="signupForm">
-      <div class="mb-3">
-        <input
-          type="email"
-          id="email"
-          class="form-control"
-          placeholder="E-mail"
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <input
-          type="password"
-          id="password"
-          class="form-control"
-          placeholder="Password"
-          required
-          minlength="6"
-        />
-      </div>
-      <div class="mb-3">
-        <input
-          type="password"
-          id="confirmPassword"
-          class="form-control"
-          placeholder="Confirm Password"
-          required
-          minlength="6"
-        />
-      </div>
 
-      <button type="submit" class="btn btn-primary w-100">Sign Up</button>
-      <p id="signupError"></p>
-    </form>
+<div class="signup-container">
+ <h2>Sign Up</h2>
+ <form id="signupForm">
+   <input type="text" id="name" placeholder="Full Name" required>
+   <input type="email" id="email" placeholder="Email" required>
+   <input type="password" id="password" placeholder="Password" required>
+   <input type="file" id="profileImage" accept="image/*" required>
+   <button type="submit">Create Account</button>
+ </form>
+ <div class="login-link">
+   Already have an account? <a href="Login.html">Login here</a>
+ </div>
+</div>
 
-    <!-- Footer Link -->
-    <div class="small-link">
-      Already have an account?
-      <a href="login.html">Login</a>
-    </div>
-  </div>
 
-  <!-- Bootstrap JS (optional) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Firebase Sign-Up Logic -->
-  <script type="module">
-    import { auth } from './firebaseConfig.js';
-    import { createUserWithEmailAndPassword }
-      from 'https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js';
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
 
-    const form   = document.getElementById('signupForm');
-    const errorP = document.getElementById('signupError');
 
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-      errorP.textContent = '';
-      const email = form.email.value.trim();
-      const pass  = form.password.value;
-      const conf  = form.confirmPassword.value;
+<script>
+ // Firebase configuration
+ const firebaseConfig = {
+   apiKey: "AIzaSyDIDvX9YnYDVjE-0RXVtlpiRwXAP5oJt8g",
+   authDomain: "environmental-sustainabi-37bbd.firebaseapp.com",
+   projectId: "environmental-sustainabi-37bbd",
+   storageBucket: "environmental-sustainabi-37bbd.appspot.com",
+   messagingSenderId: "720844755527",
+   appId: "1:720844755527:web:3c04786dfc4aa46f5b9762",
+   measurementId: "G-BF966X7HXR"
+ };
 
-      if (pass !== conf) {
-        errorP.textContent = 'Passwords do not match.';
-        return;
-      }
 
-      try {
-        await createUserWithEmailAndPassword(auth, email, pass);
-        // redirect to dashboard on success
-        window.location.href = 'dashboard.html';
-      } catch (err) {
-        errorP.textContent = err.message;
-      }
-    });
-  </script>
+ // Initialize Firebase
+ firebase.initializeApp(firebaseConfig);
+ const auth = firebase.auth();
+ const storage = firebase.storage();
+
+
+ document.getElementById('signupForm').addEventListener('submit', async function(e) {
+   e.preventDefault();
+
+
+   const name = document.getElementById("name").value;
+   const email = document.getElementById("email").value;
+   const password = document.getElementById("password").value;
+   const imageFile = document.getElementById("profileImage").files[0];
+
+
+   try {
+     // Create the user
+     const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+     const userId = userCredential.user.uid;
+
+
+     // Upload image to Firebase Storage
+     if (imageFile) {
+       const storageRef = storage.ref(`profileImages/${userId}`);
+       await storageRef.put(imageFile);
+       const downloadURL = await storageRef.getDownloadURL();
+       console.log("Profile image uploaded successfully:", downloadURL);
+       alert("Account created successfully with profile image!");
+     } else {
+       alert("Account created successfully, but no image was uploaded.");
+     }
+
+
+     // Redirect to home page
+     window.location.href = "index.html";
+   } catch (error) {
+     console.error("Signup error:", error);
+     alert("Error: " + error.message);
+   }
+ });
+</script>
+
+
 </body>
 </html>
+
+
+
+
