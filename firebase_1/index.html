@@ -6,13 +6,12 @@
   <title>Flex Boxes</title>
   <link rel="stylesheet" href="styles.css"/>
 
-  <!-- ✅ Preload banner images for faster slideshow -->
+  <!-- Preload banner images -->
   <link rel="preload" as="image" href="images/background.jpg">
   <link rel="preload" as="image" href="images/background_2.jpg">
   <link rel="preload" as="image" href="images/background_3.jpg">
 
   <style>
-    /* Circle Log In Button Styling */
     .circle-button {
       width: 70px;
       height: 70px;
@@ -26,7 +25,6 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -39,7 +37,6 @@
       border-radius: 50%;
     }
 
-    /* Banner Styling */
     .banner {
       position: relative;
       width: 100%;
@@ -75,10 +72,10 @@
 </head>
 <body>
 
-  <!-- Header Section -->
+  <!-- Header -->
   <header>
     <h1>SHOP SUSTAINABLY FOR A BETTER FUTURE</h1>
-    <nav role="navigation">
+    <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="Utencils.html">Tableware</a></li>
@@ -88,25 +85,27 @@
     </nav>
   </header>
 
-  <!-- ✅ Slideshow Banner -->
+  <!-- Slideshow Banner -->
   <div class="banner" id="banner">
     <img id="bannerImage" src="images/background.jpg" alt="Banner Image" />
     <h1 class="banner-text">WELCOME TO SHOPPING SUSTAINABLY FOR A BETTER FUTURE!</h1>
+    <button class="banner-nav left" id="prevBtn">&#10094;</button>
+    <button class="banner-nav right" id="nextBtn">&#10095;</button>
+    
   </div>
 
-  <!-- Main Content Section -->
-  <main class="flex-container" role="main">
-    <div>
-      <a href="Utencils.html">
-        <div class="flex-box" id="utensils">
-          <div class="icon" aria-hidden="true"></div>
-          <div class="text-bg">
-            <h3>Utensils</h3>
-            <p>Includes forks, knives, spoons, and more.</p>
-          </div>
+
+  <!-- Main Content -->
+  <main class="flex-container">
+    <a href="Utencils.html">
+      <div class="flex-box" id="utensils">
+        <div class="icon" aria-hidden="true"></div>
+        <div class="text-bg">
+          <h3>Utensils</h3>
+          <p>Includes forks, knives, spoons, and more.</p>
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
 
     <a href="clothes.html">
       <div class="flex-box" id="clothes">
@@ -129,21 +128,22 @@
     </a>
   </main>
 
-  <!-- Log In / Profile Circle Button -->
+  <!-- Log In / Profile -->
   <a href="Login.html" id="signupCircle" class="circle-button">Log in</a>
 
-  <!-- Footer Section -->
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Sustainable Shopping | All rights reserved</p>
   </footer>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+  <!-- Firebase Modular SDK & App Init -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getStorage } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
 
-  <!-- Firebase Config & Auth (You already include logic in JS file) -->
-  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyDIDvX9YnYDVjE-0RXVtlpiRwXAP5oJt8g",
       authDomain: "environmental-sustainabi-37bbd.firebaseapp.com",
@@ -154,10 +154,18 @@
       measurementId: "G-BF966X7HXR"
     };
 
-    firebase.initializeApp(firebaseConfig);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const storage = getStorage(app);
+    const db = getFirestore(app);
+    const analytics = getAnalytics(app);
+
+    // Export firebase services to window so your script can use them
+    window.firebaseServices = { auth, storage, db };
   </script>
 
-  <!-- ✅ Your External JavaScript for Firebase auth, buttons, and slideshow -->
-  <script src="javascript.js"></script>
+  <!-- Your logic file (must also use type="module") -->
+  <script type="module" src="javascript.js"></script>
 </body>
 </html>
+
