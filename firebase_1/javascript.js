@@ -1,4 +1,4 @@
-// 🔁 IMPORTS
+//  IMPORTS
 import { auth, storage, db } from "./firebaseConfig.js";
 import {
   onAuthStateChanged,
@@ -17,7 +17,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-  // ✅ Slideshow Banner
+  //  Slideshow Banner
   const bannerImage = document.getElementById("bannerImage");
   const images = [
     "images/background.jpg",
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   setInterval(showNextImage, 4000); // Change image every 4 seconds
 
-  // ✅ Profile Circle Update
+  // Profile Circle Update
   const button = document.getElementById("signupCircle");
   onAuthStateChanged(auth, async (user) => {
     if (user && button) {
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Profile image error:", err);
       }
 
-      // 🔄 Display Firestore Info
+      // Display Firestore Info
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // ✅ Media Upload
+  // Media Upload
   const mediaInput = document.getElementById("mediaInput");
   const uploadBtn = document.getElementById("uploadBtn");
   const mediaPreview = document.getElementById("mediaPreview");
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 🔄 Logout Support
+  // Logout Support
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// ✅ Firestore Update/Delete Functions
+// Firestore Update/Delete Functions
 export async function updateUserName(userId, newName) {
   const userRef = doc(db, "users", userId);
   await updateDoc(userRef, { name: newName });

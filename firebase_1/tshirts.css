@@ -1,0 +1,63 @@
+#BlackTshirt {
+    background-image: url('Pictures for Tshirts/Black tshirt.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#WhiteTshirt {
+    background-image: url('Pictures for Tshirts/White tshirt.jpg');
+    background-size: cover;
+    background-position: center;
+    color: black; /* Better contrast on white background */
+    min-height: 140px;
+}
+
+#NavyTshirt {
+    background-image: url('Pictures for Tshirts/Navy tshirt.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#GrayTshirt {
+    background-image: url('Pictures for Tshirts/Gray tshirt.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#RedTshirt {
+    background-image: url('Pictures for Tshirts/Red tshirt.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#BlueTshirt {
+    background-image: url('Pictures for Tshirts/Blue tshirt.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#GreenTshirt {
+    background-image: url('Pictures for Tshirts/Green tshirt.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#BrownTshirt {
+    background-image: url('Pictures for Tshirts/Brown tshirt.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}

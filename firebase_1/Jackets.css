@@ -1,0 +1,31 @@
+#BlackJacket {
+    background-image: url('pictures forwinterJackets/BlackJacket.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#NavyJacket {
+    background-image: url('pictures forwinterJackets/NavyJacket.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#GrayJacket {
+    background-image: url('pictures forwinterJackets/GrayJacket.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#BrownJacket {
+    background-image: url('pictures forwinterJackets/BrownJacket.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
