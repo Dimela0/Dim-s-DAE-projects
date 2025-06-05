@@ -3,84 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .login-container {
-      background-color: white;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 300px;
-    }
-    .login-container h2 {
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .signup-link {
-      text-align: center;
-      margin-top: 15px;
-    }
-  </style>
+  <title>Login / Sign Up</title>
+  <link rel="stylesheet" href="login.css"/>
 </head>
 <body>
+  <h2>Login / Sign Up</h2>
 
-  <div class="login-container">
-    <h2>Login</h2>
-    <form id="loginForm">
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <button type="submit">Login</button>
-    </form>
-    <div class="signup-link">
-      Don't have an account? <a href="Signup.html">Sign up here</a>
-    </div>
-  </div>
+  <input type="email" id="email" class="emailField" placeholder="Email"><br>
+  <input type="password" id="password" placeholder="Password"><br><br>
 
-  <!-- ✅ Firebase Modular Script -->
+  <button id="signupBtn">Sign Up</button>
+  <button id="loginBtn">Login</button>
+
+  <p id="message"></p>
+
   <script type="module">
-    import { auth } from './firebaseConfig.js';
-    import { signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4csGMzGOjH5xUNDgkHoMFQVgsn1JIjS0",
+      authDomain: "final-b7787.firebaseapp.com",
+      projectId: "final-b7787",
+      storageBucket: "final-b7787.firebasestorage.app",
+      messagingSenderId: "770665527586",
+      appId: "1:770665527586:web:b9a4e51d5e8b2c413e0d7b",
+      measurementId: "G-K9SNDWPD1M"
+    };
 
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const signupBtn = document.getElementById('signupBtn');
+    const loginBtn = document.getElementById('loginBtn');
+    const message = document.getElementById('message');
+
+    signupBtn.addEventListener('click', async () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        await setDoc(doc(db, "users", user.uid), {
+          email: user.email,
+          createdAt: new Date().toISOString()
+        });
+        message.innerText = "Signup successful!";
+      } catch (error) {
+        message.innerText = error.message;
+      }
+    });
+
+    loginBtn.addEventListener('click', async () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        alert("Login successful!");
+        message.innerText = "Login successful!";
         window.location.href = "index.html";
       } catch (error) {
-        console.error("Login error:", error);
-        alert("Login failed: " + error.message);
+        message.innerText = error.message;
       }
     });
   </script>
-
 </body>
 </html>

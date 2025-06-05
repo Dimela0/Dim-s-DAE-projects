@@ -1,4 +1,4 @@
-//  IMPORTS
+// 🔁 IMPORTS
 import { auth, storage, db } from "./firebaseConfig.js";
 import {
   onAuthStateChanged,
@@ -11,13 +11,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 import {
   doc,
+  setDoc,
   updateDoc,
   deleteDoc,
   getDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-  //  Slideshow Banner
+  // 🔄 Slideshow Banner
   const bannerImage = document.getElementById("bannerImage");
   const images = [
     "images/background.jpg",
@@ -29,16 +30,15 @@ document.addEventListener("DOMContentLoaded", function () {
   function showNextImage() {
     currentIndex = (currentIndex + 1) % images.length;
     bannerImage.style.opacity = 0;
-
     setTimeout(() => {
       bannerImage.src = images[currentIndex];
       bannerImage.style.opacity = 1;
     }, 500);
   }
 
-  setInterval(showNextImage, 4000); // Change image every 4 seconds
+  setInterval(showNextImage, 4000);
 
-  // Profile Circle Update
+  // 👤 Profile Circle Update
   const button = document.getElementById("signupCircle");
   onAuthStateChanged(auth, async (user) => {
     if (user && button) {
@@ -50,19 +50,17 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Profile image error:", err);
       }
 
-      // Display Firestore Info
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         console.log("User data:", docSnap.data());
-        // Optional: inject into UI
       }
     } else if (button) {
       button.innerHTML = "Log in";
     }
   });
 
-  // Media Upload
+  // ⬆️ Media Upload
   const mediaInput = document.getElementById("mediaInput");
   const uploadBtn = document.getElementById("uploadBtn");
   const mediaPreview = document.getElementById("mediaPreview");
@@ -91,28 +89,88 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Logout Support
+  // 🚪 Logout
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
       try {
         await signOut(auth);
         alert("Logged out successfully");
-        window.location.href = "Login.html";
+        window.location.href = "login.html";
       } catch (err) {
         console.error("Logout error:", err);
       }
     });
   }
+
+  // 🧠 CRUD Logic
+  const createBtn = document.getElementById("createBtn");
+  const readBtn = document.getElementById("readBtn");
+  const updateBtn = document.getElementById("updateBtn");
+  const deleteBtn = document.getElementById("deleteBtn");
+  const output = document.getElementById("crud-output");
+
+  function getFormValues() {
+    const id = document.getElementById("crud-user-id").value.trim();
+    const name = document.getElementById("crud-name").value.trim();
+    const age = parseInt(document.getElementById("crud-age").value.trim());
+    return { id, name, age };
+  }
+
+  if (createBtn) {
+    createBtn.addEventListener("click", async () => {
+      const { id, name, age } = getFormValues();
+      if (!id || !name || isNaN(age)) return alert("All fields required.");
+      try {
+        await setDoc(doc(db, "users", id), { name, age });
+        output.textContent = `✅ Created user "${id}"`;
+      } catch (err) {
+        output.textContent = `❌ Error creating: ${err.message}`;
+      }
+    });
+  }
+
+  if (readBtn) {
+    readBtn.addEventListener("click", async () => {
+      const { id } = getFormValues();
+      if (!id) return alert("Enter user ID to read.");
+      try {
+        const docSnap = await getDoc(doc(db, "users", id));
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          output.textContent = `📄 Name: ${data.name}, Age: ${data.age}`;
+        } else {
+          output.textContent = "❌ No such user.";
+        }
+      } catch (err) {
+        output.textContent = `❌ Error reading: ${err.message}`;
+      }
+    });
+  }
+
+  if (updateBtn) {
+    updateBtn.addEventListener("click", async () => {
+      const { id, name, age } = getFormValues();
+      if (!id || !name || isNaN(age)) return alert("All fields required.");
+      try {
+        await updateDoc(doc(db, "users", id), { name, age });
+        output.textContent = `🔄 Updated user "${id}"`;
+      } catch (err) {
+        output.textContent = `❌ Error updating: ${err.message}`;
+      }
+    });
+  }
+
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", async () => {
+      const { id } = getFormValues();
+      if (!id) return alert("Enter user ID to delete.");
+      try {
+        await deleteDoc(doc(db, "users", id));
+        output.textContent = `🗑️ Deleted user "${id}"`;
+      } catch (err) {
+        output.textContent = `❌ Error deleting: ${err.message}`;
+      }
+    });
+  }
 });
-
-// Firestore Update/Delete Functions
-export async function updateUserName(userId, newName) {
-  const userRef = doc(db, "users", userId);
-  await updateDoc(userRef, { name: newName });
-}
-
-export async function deleteUserData(userId) {
-  const userRef = doc(db, "users", userId);
-  await deleteDoc(userRef);
-}

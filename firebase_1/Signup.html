@@ -1,73 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
- <title>Sign Up</title>
- <style>
-   body {
-     font-family: Arial, sans-serif;
-     background-color: #f5f5f5;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     height: 100vh;
-   }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-   .signup-container {
-     background-color: white;
-     padding: 30px;
-     border-radius: 8px;
-     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-     width: 300px;
-   }
+    .signup-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+    }
 
-   .signup-container h2 {
-     margin-bottom: 20px;
-     text-align: center;
-   }
+    .signup-container h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
 
-   input[type="text"],
-   input[type="email"],
-   input[type="password"],
-   input[type="file"] {
-     width: 100%;
-     padding: 10px;
-     margin: 10px 0;
-     border-radius: 4px;
-     border: 1px solid #ccc;
-   }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
 
-   button {
-     width: 100%;
-     padding: 10px;
-     background-color: #4CAF50;
-     color: white;
-     border: none;
-     border-radius: 4px;
-     cursor: pointer;
-   }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-   .login-link {
-     text-align: center;
-     margin-top: 15px;
-   }
- </style>
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
 </head>
 <body>
 
 <div class="signup-container">
- <h2>Sign Up</h2>
- <form id="signupForm">
-   <input type="text" id="name" placeholder="Full Name" required>
-   <input type="email" id="email" placeholder="Email" required>
-   <input type="password" id="password" placeholder="Password" required>
-   <input type="file" id="profileImage" accept="image/*" required>
-   <button type="submit">Create Account</button>
- </form>
- <div class="login-link">
-   Already have an account? <a href="Login.html">Login here</a>
- </div>
+  <h2>Sign Up</h2>
+  <form id="signupForm">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <!-- Optional image upload field -->
+    <input type="file" id="profileImage" accept="image/*">
+    <button type="submit">Create Account</button>
+  </form>
+  <div class="login-link">
+    Already have an account? <a href="Login.html">Login here</a>
+  </div>
 </div>
 
 <!-- Firebase SDKs -->
@@ -77,61 +78,61 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
 <script>
- // Firebase configuration
- const firebaseConfig = {
-   apiKey: "AIzaSyDIDvX9YnYDVjE-0RXVtlpiRwXAP5oJt8g",
-   authDomain: "environmental-sustainabi-37bbd.firebaseapp.com",
-   projectId: "environmental-sustainabi-37bbd",
-   storageBucket: "environmental-sustainabi-37bbd.appspot.com",
-   messagingSenderId: "720844755527",
-   appId: "1:720844755527:web:3c04786dfc4aa46f5b9762",
-   measurementId: "G-BF966X7HXR"
- };
+  // Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDIDvX9YnYDVjE-0RXVtlpiRwXAP5oJt8g",
+    authDomain: "environmental-sustainabi-37bbd.firebaseapp.com",
+    projectId: "environmental-sustainabi-37bbd",
+    storageBucket: "environmental-sustainabi-37bbd.appspot.com",
+    messagingSenderId: "720844755527",
+    appId: "1:720844755527:web:3c04786dfc4aa46f5b9762",
+    measurementId: "G-BF966X7HXR"
+  };
 
- // Initialize Firebase
- firebase.initializeApp(firebaseConfig);
- const auth = firebase.auth();
- const storage = firebase.storage();
- const db = firebase.firestore(); // ✅ Firestore initialized
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const storage = firebase.storage();
+  const db = firebase.firestore(); // ✅ Firestore initialized
 
- document.getElementById('signupForm').addEventListener('submit', async function(e) {
-   e.preventDefault();
+  document.getElementById('signupForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-   const name = document.getElementById("name").value;
-   const email = document.getElementById("email").value;
-   const password = document.getElementById("password").value;
-   const imageFile = document.getElementById("profileImage").files[0];
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const imageFile = document.getElementById("profileImage").files[0]; // Optional file upload
 
-   try {
-     // Create user account
-     const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-     const userId = userCredential.user.uid;
+    try {
+      // Create user account
+      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+      const userId = userCredential.user.uid;
 
-     // Upload image to Firebase Storage
-     let downloadURL = "";
-     if (imageFile) {
-       const storageRef = storage.ref(`profileImages/${userId}`);
-       await storageRef.put(imageFile);
-       downloadURL = await storageRef.getDownloadURL();
-       console.log("Profile image uploaded:", downloadURL);
-     }
+      // If an image is selected, upload it
+      let downloadURL = "";
+      if (imageFile) {
+        const storageRef = storage.ref(`profileImages/${userId}`);
+        await storageRef.put(imageFile);
+        downloadURL = await storageRef.getDownloadURL();
+        console.log("Profile image uploaded:", downloadURL);
+      }
 
-     // Save user data to Firestore
-     await db.collection("users").doc(userId).set({
-       name: name,
-       email: email,
-       profileImage: downloadURL,
-       createdAt: new Date()
-     });
-     console.log("User data saved to Firestore");
+      // Save user data to Firestore
+      await db.collection("users").doc(userId).set({
+        name: name,
+        email: email,
+        profileImage: downloadURL, // Only save the URL if there's an image
+        createdAt: new Date()
+      });
+      console.log("User data saved to Firestore");
 
-     alert("Account created successfully!");
-     window.location.href = "index.html";
-   } catch (error) {
-     console.error("Signup error:", error);
-     alert("Error: " + error.message);
-   }
- });
+      alert("Account created successfully!");
+      window.location.href = "index.html";
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("Error: " + error.message);
+    }
+  });
 </script>
 
 </body>

@@ -1,0 +1,63 @@
+#RedSweater {
+    background-image: url('Pictures for Sweaters/redsweater.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#BlueSweater {
+    background-image: url('Pictures for Sweaters/bluesweater.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#GreenSweater {
+    background-image: url('Pictures for Sweaters/Greensweater.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#YellowSweater {
+    background-image: url('Pictures for Sweaters/yellow sweater.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#BlackSweater {
+    background-image: url('Pictures for Sweaters/blacksweater.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#WhiteSweater {
+    background-image: url('Pictures for Sweaters/whitesweater.jpg');
+    background-size: cover;
+    background-position: center;
+    color: black; /* Better contrast on white bg */
+    min-height: 140px;
+}
+
+#PurpleSweater {
+    background-image: url('Pictures for Sweaters/Purplesweater.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}
+
+#GreySweater {
+    background-image: url('Pictures for Sweaters/graysweater.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 140px;
+}

@@ -79,8 +79,9 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="Utencils.html">Tableware</a></li>
-        <li><a href="clothes.html">Clothes</a></li>
+        <li><a href="Womens clothes.html">Womens Clothes</a></li>
         <li><a href="Food.html">Food</a></li>
+        <li><a href="clothes.html">Mens Clothes</a></li>
       </ul>
     </nav>
   </header>
@@ -107,11 +108,21 @@
       </div>
     </a>
 
-    <a href="clothes.html">
-      <div class="flex-box" id="clothes">
+    <a href="Womens clothes.html">
+      <div class="flex-box" id="Womensclothes">
         <div class="icon" aria-hidden="true"></div>
         <div class="text-bg">
-          <h3>Clothes</h3>
+          <h3>Womens Clothes</h3>
+          <p>Find trendy fashion for every occasion.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="Mens clothes.html">
+      <div class="flex-box" id="Mensclothes">
+        <div class="icon" aria-hidden="true"></div>
+        <div class="text-bg">
+          <h3>Mens Clothes</h3>
           <p>Find trendy fashion for every occasion.</p>
         </div>
       </div>
@@ -129,8 +140,8 @@
   </main>
 
   <!-- Log In / Profile -->
-  <a href="Login.html" id="signupCircle" class="circle-button">Log in</a>
-
+  <a href="login.html" id="signupCircle" class="circle-button">Log in</a>
+  
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 Sustainable Shopping | All rights reserved</p>
@@ -138,34 +149,37 @@
 
   <!-- Firebase Modular SDK & App Init -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getStorage } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
-
+    import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+    import { getStorage } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-storage.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+  
     const firebaseConfig = {
-      apiKey: "AIzaSyDIDvX9YnYDVjE-0RXVtlpiRwXAP5oJt8g",
-      authDomain: "environmental-sustainabi-37bbd.firebaseapp.com",
-      projectId: "environmental-sustainabi-37bbd",
-      storageBucket: "environmental-sustainabi-37bbd.appspot.com",
-      messagingSenderId: "720844755527",
-      appId: "1:720844755527:web:3c04786dfc4aa46f5b9762",
-      measurementId: "G-BF966X7HXR"
+      apiKey: "AIzaSyC4csGMzGOjH5xUNDgkHoMFQVgsn1JIjS0",
+      authDomain: "final-b7787.firebaseapp.com",
+      projectId: "final-b7787",
+      storageBucket: "final-b7787.firebasestorage.app",
+      messagingSenderId: "770665527586",
+      appId: "1:770665527586:web:b9a4e51d5e8b2c413e0d7b",
+      measurementId: "G-K9SNDWPD1M"
     };
-
-    const app = initializeApp(firebaseConfig);
+  
+    // Prevent duplicate initialization
+    const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
     const auth = getAuth(app);
-    const storage = getStorage(app);
     const db = getFirestore(app);
+    const storage = getStorage(app);
     const analytics = getAnalytics(app);
-
-    // Export firebase services to window so your script can use them
-    window.firebaseServices = { auth, storage, db };
+  
+    // Export for other scripts
+    window.firebaseServices = { auth, db, storage };
   </script>
+  
 
   <!-- Your logic file (must also use type="module") -->
   <script type="module" src="javascript.js"></script>
+
 </body>
 </html>
 

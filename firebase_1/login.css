@@ -1,0 +1,81 @@
+/* General page styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column; /* Align items vertically */
+}
+
+/* Container for the form */
+.container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 20%;
+    max-width: 40px; /* Ensure the form doesn't stretch too wide */
+    display: flex;
+    flex-direction: column; /* Stack children elements vertically */
+    justify-content: center; /* Align form fields vertically */
+}
+
+/* Form title */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Input fields */
+input[type="email"], input[type="password"] {
+    width: 100%; /* Ensures input fields take up the full width of the container */
+    padding: 12px; /* Increased padding for better user experience */
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Buttons */
+button {
+    width: 100%; /* Ensures buttons take up the full width of the container */
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Links between Login and Sign Up */
+.login-signup-link {
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-signup-link:hover {
+    text-decoration: underline;
+}
+
+input[ type="email"],
+input[ type="password" ],
+button#signupBtn,
+button#loginBtn {
+    width: 20%;
+}

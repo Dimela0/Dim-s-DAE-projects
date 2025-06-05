@@ -72,13 +72,22 @@ nav ul li a:hover {
 }
 
 /* Specific background image for Clothes */
-#clothes {
+#Womensclothes {
     background-image: url('images/cloths.png'); 
     background-size: cover;
     background-position: center;
     color: white; /* Make text readable */
     min-height: 140px; /* Ensures consistent height */
 }
+
+#Mensclothes {
+    background-image: url('images/cloths.png'); 
+    background-size: cover;
+    background-position: center;
+    color: white; /* Make text readable */
+    min-height: 140px; /* Ensures consistent height */
+}
+
 #utensils{
     background-image: url('images/Utencils.jpg');
     background-size: cover;
